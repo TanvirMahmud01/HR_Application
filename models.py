@@ -40,7 +40,7 @@ def build_class_list(tup):
 
 def get_employees():
     db = dbConnection.DB()
-    data = db.get_employees()
+    data = db.fetch_employee()
     return build_class_list(data)
 
 

@@ -8,9 +8,9 @@ class DB():
     def __init__(self) -> None:
         pass
 
-    def get_employees(self):
+    def fetch_employee(self):
         conn = cx_Oracle.connect(conStr)
-        # sqlCmd = 'select employee_id, first_name, last_name from hr_employees'
+
         sqlCmd = 'select * from hr_employees'
         try:
             cur = conn.cursor()
@@ -31,11 +31,8 @@ class DB():
         finally:
             conn.close()
 
-    def update_employee(self, id, new_email: str):
-        sqlCmd = "update hr_employees set email = 'Tonmoy' where employee_id = 100"
-        sql = ('update billing_headers '
-               'set amount = :amount '
-               'where billing_no = :billing_no')
+    def update_employee(self, id, email: str, phone: str, salary: int):
+        sqlCmd = f"update hr_employees set email = :email, phone_number= :phone, salary= :salary where employee_id = :id"
 
         try:
             # establish a new connection
@@ -47,7 +44,7 @@ class DB():
                 # create a cursor
                 with connection.cursor() as cursor:
                     # execute the insert statement
-                    cursor.execute(sqlCmd)
+                    cursor.execute(sqlCmd, [email, phone, salary, id])
                     # commit the change
                     connection.commit()
         except cx_Oracle.Error as error:
@@ -56,5 +53,5 @@ class DB():
 
 if __name__ == '__main__':
     db = DB()
-    db.update_employee(100, 'Tommy')
+    db.update_employee(100, 'Tonmoy', '515.123.4567', 30000)
 # column = ['EMPLOYEE_ID', 'FIRST_NAME', 'LAST_NAME', 'EMAIL', 'PHONE_NUMBER', 'HIRE_DATE', 'JOB_ID', 'SALARY', 'COMMISSION_PCT', 'MANAGER_ID', 'DEPARTMENT_ID']

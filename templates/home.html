@@ -24,11 +24,11 @@
         <td>{{ employee.employee_id }}</td>
         <td>{{ employee.first_name }}</td>
         <td>{{ employee.last_name }}</td>
-        <td><input type="text" value="{{ employee.email }}" /></td>
-        <td><input type="text" value="{{ employee.phone }}" /></td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.phone}}</td>
         <td>{{ employee.hire_date }}</td>
         <td>{{ employee.job_id }}</td>
-        <td><input type="text" value="{{ employee.salary }}" /></td>
+        <td>{{employee.salary}}</td>
         <td>{{ employee.commission }}</td>
         <td>{{ employee.manager_id }}</td>
         <td>{{ employee.department_id }}</td>
@@ -59,7 +59,9 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">
+                Update Employee Profile
+              </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -67,16 +69,193 @@
                 aria-label="Close"
               ></button>
             </div>
+
             <div class="modal-body">
-              <input type="text" /><input
-                type="text"
-                name=""
-                id=""
-                value="{{employee.employee_id}}"
-              />
-              Employee id:
+              <form action="/home", method="POST">
+                <div class="container">
+                <div class="form-group row">
+                  <label for="id" class="col-sm-3 col-form-label"
+                    >Employee ID</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="id"
+                      name="id"
+                      value="{{employee.employee_id}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="staticFName" class="col-sm-3 col-form-label"
+                    >First Name</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="staticFName"
+                      value="{{employee.first_name}}"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="staticLName" class="col-sm-3 col-form-label"
+                    >Last Name</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="staticLName"
+                      value="{{employee.last_name}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="email" class="col-sm-3 col-form-label"
+                    >Email</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-describedby="emailHelp"
+                      id="email"
+                      name="email"
+                      value="{{employee.email}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="phone" class="col-sm-3 col-form-label"
+                    >Phone</label
+                  >
+                  <div class="col-sm-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="phone"
+                      name="phone"
+                      value="{{employee.phone}}"
+                    />
+                  </div>
+                </div>
+
+               
+                <div class="form-group row">
+                  <label for="staticHDate" class="col-sm-3 col-form-label"
+                    >Hire Date</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="staticHDate"
+                      value="{{employee.hire_date}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="staticJobId" class="col-sm-3 col-form-label"
+                    >Job ID</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="staticJobId"
+                      value="{{employee.job_id}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="salary" class="col-sm-3 col-form-label"
+                    >Salary</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="salary"
+                      name="salary"
+                      value="{{employee.salary}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="staticComm" class="col-sm-3 col-form-label"
+                    >Commission</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="staticComm"
+                      value="{{employee.commission}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="staticMID" class="col-sm-3 col-form-label"
+                    >Manager ID</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="staticMID"
+                      value="{{employee.manager_id}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="staticDID" class="col-sm-3 col-form-label"
+                    >Department ID</label
+                  >
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      readonly
+                      class="form-control-plaintext"
+                      id="staticDID"
+                      value="{{employee.department_id}}"
+                    />
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+              </form>
             </div>
-            <div class="modal-footer">
+            </div>
+            <!-- <div class="modal-footer">
               <button
                 type="button"
                 class="btn btn-secondary"
@@ -87,7 +266,7 @@
               <button type="button" class="btn btn-primary">
                 Save changes
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
