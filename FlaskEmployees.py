@@ -1,3 +1,4 @@
+from datetime import date
 from flask import Flask, render_template, url_for, request, redirect
 
 from dbConnection import DB
@@ -7,6 +8,9 @@ import dbConnection
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+
+current_date = date.today()
 
 
 @app.route('/')
@@ -33,9 +37,9 @@ def home():
         return render_template('home.html', employees=employees)
 
 
-@app.route('/about',  methods=['GET', 'POST'])
+@app.route('/newemployee',  methods=['GET', 'POST'])
 def about():
-    return render_template('about.html', title='About')
+    return render_template('newemployee.html', title='New Employee', date=current_date)
 
 
 if __name__ == '__main__':
