@@ -1,4 +1,10 @@
-import cx_Oracle
+
+import oracledb
+import config
+
+connection = oracledb.connect(
+    user=config.username, password=config.password, dsn=config.dsn)
+
 
 conStr = 'COMP214_m23_er_22/password@199.212.26.208:1521/sqld'
 conn = None
@@ -9,7 +15,8 @@ class DB():
         pass
 
     def fetch_employee(self):
-        conn = cx_Oracle.connect(conStr)
+        conn = oracledb.connect(user=config.username,
+                                password=config.password, dsn=config.dsn)
 
         sqlCmd = 'select * from hr_employees'
         try:
@@ -37,17 +44,17 @@ class DB():
         try:
             # establish a new connection
             'COMP214_m23_er_22/password@199.212.26.208:1521/sqld'
-            with cx_Oracle.connect(user='COMP214_m23_er_22',
-                                   password='password',
-                                   dsn='199.212.26.208/sqld',
-                                   encoding='UTF-8') as connection:
+            with oracledb.connect(user='COMP214_m23_er_22',
+                                  password='password',
+                                  dsn='199.212.26.208/sqld',
+                                  encoding='UTF-8') as connection:
                 # create a cursor
                 with connection.cursor() as cursor:
                     # execute the insert statement
                     cursor.execute(sqlCmd, [email, phone, salary, id])
                     # commit the change
                     connection.commit()
-        except cx_Oracle.Error as error:
+        except oracledb.Error as error:
             print(error)
 
 
