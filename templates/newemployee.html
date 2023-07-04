@@ -1,8 +1,8 @@
 {% extends "layout.html" %} {% block newemployee %}
 
 <div class="container px-5 my-5">
-  <h1>Hire New Employee</h1>
-  <form id="">
+  <h1>Employee Hiring Form</h1>
+  <form action="/newemployee" method="POST">
     <div class="form-group row">
       <div class="form-floating mb-3 col-sm">
         <input
@@ -10,6 +10,7 @@
           id="firstName"
           type="text"
           placeholder="First Name"
+          name="first_name"
           data-sb-validations="required"
         />
         <label for="firstName">First Name</label>
@@ -24,6 +25,7 @@
           id="lastName"
           type="text"
           placeholder="Last Name"
+          name="last_name"
           data-sb-validations="required"
         />
         <label for="lastName">Last Name</label>
@@ -37,7 +39,8 @@
           class="form-control"
           id="email"
           type="text"
-          placeholder="Last Name"
+          placeholder="Email"
+          name="email"
           data-sb-validations="required"
         />
         <label for="email">Email</label>
@@ -54,6 +57,7 @@
           id="phone"
           type="number"
           placeholder="Phone Number"
+          name="phone_number"
           data-sb-validations="required"
         />
         <label for="phone">Phone Number</label>
@@ -68,6 +72,7 @@
           id="date"
           type="date"
           value="{{date}}"
+          name="hire_date"
           data-sb-validations="required"
         />
         <label for="date">Date</label>
@@ -81,16 +86,56 @@
           class="form-control"
           id="salary"
           type="number"
+          name="salary"
           placeholder="Job ID"
           data-sb-validations="required"
         />
-        <label for="slary">Salary</label>
+        <label for="salary">Salary</label>
         <div class="invalid-feedback" data-sb-feedback="firstName:required">
           Salary is required.
         </div>
       </div>
     </div>
+
+    <div class="form-floating mb-3 col-sm">
+      <select class="form-select" id="job" name="job_id">
+        {% for job in jobs %}
+        <option value="{{job[0]}}">{{job[0]}}, {{job[1]}}</option>
+        {% endfor %}
+      </select>
+      <label for="job">Job ID, Title</label>
+    </div>
+
+    <div class="form-floating mb-3 col-sm">
+      <select class="form-select" id="manager" name="manager_id">
+        <option value="" selected="None">None</option>
+        {% for manager in managers %}
+        <option value="{{manager[0]}}">
+          {{manager[1]}} {{manager[2]}}, ID: {{manager[0]}}
+        </option>
+        {% endfor %}
+      </select>
+      <label for="manager">Manager, ID</label>
+    </div>
+
+    <div class="form-floating mb-3 col-sm">
+      <select class="form-select" id="department" name="department_id">
+        <option value="" selected="None">None</option>
+        {% for department in departments %}
+        <option value="{{department[0]}}">
+          {{ department[0] }} {{ department[1] }}
+        </option>
+        {% endfor %}
+      </select>
+      <label for="department">Department ID, Name</label>
+    </div>
+
+    <div class="">
+      <button type="button" class="btn btn-secondary">Cancel</button>
+      <button type="submit" class="btn btn-primary">Hire Employee</button>
+    </div>
   </form>
 </div>
 
+<!-- {% for job in jobs %} Job ID: {{job[0]}} Job Title: {{job[1]}} <br />{% endfor %} -->
 {% endblock newemployee %}
