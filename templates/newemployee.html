@@ -2,19 +2,19 @@
 
 <div class="container px-5 my-5">
   <h1>Employee Hiring Form</h1>
-  <form action="/newemployee" method="POST">
+  <form class="needs-validation" action="/newemployee" method="POST">
     <div class="form-group row">
       <div class="form-floating mb-3 col-sm">
         <input
           class="form-control"
-          id="firstName"
+          id="first_name"
           type="text"
           placeholder="First Name"
           name="first_name"
           data-sb-validations="required"
         />
-        <label for="firstName">First Name</label>
-        <div class="invalid-feedback" data-sb-feedback="firstName:required">
+        <label for="first_name">First Name</label>
+        <div class="invalid-feedback" data-sb-feedback="first_name:required">
           First Name is required.
         </div>
       </div>
@@ -27,6 +27,7 @@
           placeholder="Last Name"
           name="last_name"
           data-sb-validations="required"
+          required
         />
         <label for="lastName">Last Name</label>
         <div class="invalid-feedback" data-sb-feedback="firstName:required">
@@ -42,6 +43,7 @@
           placeholder="Email"
           name="email"
           data-sb-validations="required"
+          required
         />
         <label for="email">Email</label>
         <div class="invalid-feedback" data-sb-feedback="firstName:required">
@@ -58,12 +60,8 @@
           type="number"
           placeholder="Phone Number"
           name="phone_number"
-          data-sb-validations="required"
         />
         <label for="phone">Phone Number</label>
-        <div class="invalid-feedback" data-sb-feedback="phone:required">
-          phone is required.
-        </div>
       </div>
 
       <div class="form-floating mb-3 col-sm">
@@ -74,6 +72,7 @@
           value="{{date}}"
           name="hire_date"
           data-sb-validations="required"
+          required
         />
         <label for="date">Date</label>
         <div class="invalid-feedback" data-sb-feedback="firstName:required">
@@ -88,12 +87,8 @@
           type="number"
           name="salary"
           placeholder="Job ID"
-          data-sb-validations="required"
         />
         <label for="salary">Salary</label>
-        <div class="invalid-feedback" data-sb-feedback="firstName:required">
-          Salary is required.
-        </div>
       </div>
     </div>
 

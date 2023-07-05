@@ -16,11 +16,8 @@ class DB():
         sqlCmd = 'select * from hr_employees order by employee_id desc'
         try:
             cur = conn.cursor()
-            print("Connected to DB!!!")
-
             cur.execute(sqlCmd)
             result = cur.fetchall()
-
             cur.close()
             return result
 
