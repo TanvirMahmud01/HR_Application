@@ -30,8 +30,8 @@ class DB():
         finally:
             conn.close()
 
-    def update_employee(self, id, email: str, phone: str, salary: int):
-        sqlCmd = f"update hr_employees set email = :email, phone_number= :phone, salary= :salary where employee_id = :id"
+    def update_employee(self, id, email: str, phone, salary):
+        sqlCmd = "update hr_employees set email = :email, phone_number= :phone, salary= :salary where employee_id = :id"
 
         try:
             with oracledb.connect(user=config.username,
@@ -46,23 +46,18 @@ class DB():
         except oracledb.Error as error:
             print(error)
 
-    def add_employee(self, first_name: str, last_name: str, email, phone_number, hire_date, job_id,  salary: int, manager_id, department_id):
-        # sqlCmd = f"update hr_employees set email = :email, phone_number= :phone, salary= :salary where employee_id = :id"
-        sql = f'''INSERT INTO hr_employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, 
-        manager_id, department_id) VALUES ( hr_employees_id_gen.NEXTVAL, :first_name, :last_name , :email, :phone_number, :hire_date, :job_id, :salary, null, :manager_id, :department_id)
-        '''
+    def add_employee(self, first_name: str, last_name: str, email, phone_number, hire_date, job_id,  salary, manager_id, department_id):
+
         try:
             with oracledb.connect(user=config.username,
                                   password=config.password, dsn=config.dsn,
                                   encoding='UTF-8') as connection:
                 # create a cursor
                 with connection.cursor() as cursor:
-                    # execute the insert statement
-                    cursor.execute(sql, [first_name, last_name, email, phone_number,
-                                   hire_date, job_id, salary, manager_id, department_id])
-                    print(f'Executed {sql}')
-                    # commit the change
-                    connection.commit()
+                    # calling procedure to insert employee
+                    cursor.callproc('employee_hire_sp', [first_name, last_name, email, phone_number,
+                                                         hire_date, job_id, salary, manager_id, department_id])
+
         except oracledb.Error as error:
             print(error)
 

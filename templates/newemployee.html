@@ -131,11 +131,11 @@
     </div>
 
     <div class="">
-      <button type="button" class="btn btn-secondary">Cancel</button>
+      <a class="btn btn-warning" href="{{ url_for('home') }}">Cancel</a>
+
       <button type="submit" class="btn btn-primary">Hire Employee</button>
     </div>
   </form>
 </div>
 
-<!-- {% for job in jobs %} Job ID: {{job[0]}} Job Title: {{job[1]}} <br />{% endfor %} -->
 {% endblock newemployee %}

@@ -37,7 +37,7 @@
             type="button"
             class="btn btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#edit"
+            data-bs-target="#EditModal_{{employee.employee_id}}"
           >
             Edit
           </button>
@@ -47,7 +47,7 @@
       <!-- Modal -->
       <div
         class="modal fade"
-        id="edit"
+        id="EditModal_{{employee.employee_id}}"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -251,20 +251,10 @@
               </form>
             </div>
             </div>
-            <!-- <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
-            </div> -->
+        
           </div>
         </div>
+        
       </div>
       {% endfor %}
     </table>

@@ -22,21 +22,21 @@ def home():
         id = result["id"]
         email = result["email"]
         phone = result["phone"]
-        salary = int(result["salary"])
+        salary = int(result["salary"]) if result["salary"] != '' else ''
 
         db = dbConnection.DB()
         db.update_employee(id, email, phone, salary)
 
         # sqlCmd = f'select {email}, first_name, last_name from hr_employees'
 
-        return redirect('/home')
+        return redirect(url_for('home'))
     else:
         employees = models.get_employees()
         return render_template('home.html', employees=employees)
 
 
 @app.route('/newemployee',  methods=['GET', 'POST'])
-def about():
+def newemployee():
 
     if request.method == 'POST':
 
@@ -47,18 +47,17 @@ def about():
         phone_number = result["phone_number"]
         hire_date = datetime.strptime(result["hire_date"], '%Y-%m-%d').date()
         job_id = result["job_id"]
-        salary = int(result["salary"])
-        manager_id = int(result["manager_id"])
-        department_id = int(result["department_id"])
+        salary = int(result["salary"]) if result["salary"] != '' else ''
+        manager_id = int(result["manager_id"]
+                         ) if result["manager_id"] != '' else ''
+        department_id = int(result["department_id"]
+                            ) if result["department_id"] != '' else ''
 
         db = dbConnection.DB()
         db.add_employee(first_name, last_name, email, phone_number,
                         hire_date, job_id, salary, manager_id, department_id)
 
-        print(first_name, last_name, email, phone_number,
-              hire_date, job_id, salary, manager_id, department_id)
-
-        return redirect('/home')
+        return redirect(url_for('home'))
     else:
 
         db = dbConnection.DB()
