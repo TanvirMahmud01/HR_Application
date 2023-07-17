@@ -1,0 +1,70 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container">
+  <div class="py-5 text-center" style="color: #5f788a">
+    <h2>Update Job Information</h2>
+  </div>
+
+  <!-- Add message here -->
+  {% if message %}
+  <div class="alert alert-info">{{ message }}</div>
+  {% endif %}
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Job ID</th>
+        <th scope="col">Job Title</th>
+        <th scope="col">Min Salary</th>
+        <th scope="col">Max Salary</th>
+        <th scope="col">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in jobs %}
+      <form method="POST">
+        <tr>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="job_id"
+              name="job_id"
+              value="{{ job[0] }}"
+              readonly
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="job_title"
+              name="job_title"
+              value="{{ job[1] }}"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control"
+              id="min_salary"
+              name="min_salary"
+              value="{{ job[2] }}"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control"
+              id="max_salary"
+              name="max_salary"
+              value="{{ job[3] }}"
+            />
+          </td>
+          <td><button type="submit" class="btn btn-primary">Update</button></td>
+        </tr>
+      </form>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

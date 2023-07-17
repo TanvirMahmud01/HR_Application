@@ -44,7 +44,6 @@ class DB():
             print(error)
 
     def add_employee(self, first_name: str, last_name: str, email, phone_number, hire_date, job_id,  salary, manager_id, department_id):
-
         try:
             with oracledb.connect(user=config.username,
                                   password=config.password, dsn=config.dsn,
@@ -61,7 +60,6 @@ class DB():
     def fetch_jobs(self):
         sqlCmd = "select * from hr_jobs"
         try:
-
             with oracledb.connect(user=config.username,
                                   password=config.password, dsn=config.dsn,
                                   encoding='UTF-8') as connection:
@@ -70,9 +68,24 @@ class DB():
                     cursor.execute(sqlCmd)
                     result = cursor.fetchall()
                     return result
-
         except oracledb.Error as error:
             print(error)
+
+    def update_job(self, job_id, job_title, min_salary, max_salary):
+        try:
+            with oracledb.connect(user=config.username,
+                                  password=config.password, dsn=config.dsn,
+                                  encoding='UTF-8') as connection:
+                # create a cursor
+                with connection.cursor() as cursor:
+                    # calling procedure to update job
+                    cursor.callproc(
+                        'new_job', [job_id, job_title, min_salary, max_salary])
+                    print(f"Job {job_id} updated successfully.")
+                    connection.commit()
+
+        except oracledb.Error as error:
+            print(f"Failed to update job {job_id}: {error}")
 
     def fetch_managers(self):
         sqlCmd = '''
@@ -87,7 +100,6 @@ class DB():
                         order by sup.employee_id
                  '''
         try:
-
             with oracledb.connect(user=config.username,
                                   password=config.password, dsn=config.dsn,
                                   encoding='UTF-8') as connection:
@@ -96,7 +108,6 @@ class DB():
                     cursor.execute(sqlCmd)
                     result = cursor.fetchall()
                     return result
-
         except oracledb.Error as error:
             print(error)
 
@@ -105,7 +116,6 @@ class DB():
                         select department_id, department_name from hr_departments
                  '''
         try:
-
             with oracledb.connect(user=config.username,
                                   password=config.password, dsn=config.dsn,
                                   encoding='UTF-8') as connection:
@@ -114,7 +124,20 @@ class DB():
                     cursor.execute(sqlCmd)
                     result = cursor.fetchall()
                     return result
+        except oracledb.Error as error:
+            print(error)
 
+    def get_job_description(self, job_id):
+        try:
+            with oracledb.connect(user=config.username,
+                                  password=config.password, dsn=config.dsn,
+                                  encoding='UTF-8') as connection:
+                # create a cursor
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "SELECT job_title FROM hr_jobs WHERE job_id = :job_id", [job_id])
+                    result = cursor.fetchone()
+                    return result[0] if result else None
         except oracledb.Error as error:
             print(error)
 
@@ -123,4 +146,3 @@ if __name__ == '__main__':
     db = DB()
     r = db.fetch_employee()
     print(r)
-    pass

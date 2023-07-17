@@ -1,0 +1,45 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container">
+  <div class="py-5 text-center" style="color: #5f788a">
+    <h2>Identify Job Description</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <form method="POST" class="mb-5">
+        <div class="mb-3">
+          <label for="job_id" class="form-label">Job ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="job_id"
+            name="job_id"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  {% if job_description %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card text-center">
+        <div
+          class="card-header"
+          style="background-color: #5f788a; color: #ffffff"
+        >
+          Job Description
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Job ID: {{ request.form["job_id"] }}</h5>
+          <p class="card-text">{{ job_description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
